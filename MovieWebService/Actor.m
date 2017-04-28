@@ -2,8 +2,8 @@
 //  Actor.m
 //  MovieWebService
 //
-//  Created by Tan, Michael (Agoda) on 3/10/14.
-//  Copyright (c) 2014 Tan, Michael (Agoda). All rights reserved.
+//  Created by testDev on 4/11/17.
+//  Copyright © 2017 TestCompany. All rights reserved.
 //
 
 #import "Actor.h"

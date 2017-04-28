@@ -2,12 +2,11 @@
 //  TappableLabel.h
 //  MovieWebService
 //
-//  Created by Tan, Michael (Agoda) on 20/8/15.
-//  Copyright (c) 2015 Tan, Michael (Agoda). All rights reserved.
+//  Created by testDev on 4/11/17.
+//  Copyright © 2017 TestCompany. All rights reserved.
 //
 
 #import <UIKit/UIKit.h>
-
 @protocol TappableLabelDelegate;
 
 @interface TappableLabel : UILabel
