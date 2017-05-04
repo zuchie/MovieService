@@ -71,6 +71,9 @@
 /* Begin PBXFileReference section */
 		026F64ADDEE1970845506D2F /* DetailsInteractorTests.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = DetailsInteractorTests.swift; sourceTree = "<group>"; };
 		05A4B1832935E3B822D3EBA2 /* MoviesListViewInput.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = MoviesListViewInput.h; sourceTree = "<group>"; };
+		0763751C1EBB124B006E280B /* DetailViewController.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = DetailViewController.png; path = Screenshots/DetailViewController.png; sourceTree = SOURCE_ROOT; };
+		0763751D1EBB124B006E280B /* DetailViewController_expanded.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = DetailViewController_expanded.png; path = Screenshots/DetailViewController_expanded.png; sourceTree = SOURCE_ROOT; };
+		0763751E1EBB124B006E280B /* ListViewController.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = ListViewController.png; path = Screenshots/ListViewController.png; sourceTree = SOURCE_ROOT; };
 		0B106271B4B6191EDF801976 /* DetailsRouterInput.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = DetailsRouterInput.swift; sourceTree = "<group>"; };
 		0FB9110561F8A83DB1F6046A /* DetailsInteractor.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = DetailsInteractor.swift; sourceTree = "<group>"; };
 		148E8494DB90097392C92E80 /* DetailsModuleInput.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = DetailsModuleInput.swift; sourceTree = "<group>"; };
@@ -172,6 +175,16 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		076375151EBB0F27006E280B /* Screenshots */ = {
+			isa = PBXGroup;
+			children = (
+				0763751C1EBB124B006E280B /* DetailViewController.png */,
+				0763751D1EBB124B006E280B /* DetailViewController_expanded.png */,
+				0763751E1EBB124B006E280B /* ListViewController.png */,
+			);
+			path = Screenshots;
+			sourceTree = "<group>";
+		};
 		1939A4DF7787DD57DF0CAA34 /* MoviesList */ = {
 			isa = PBXGroup;
 			children = (
@@ -310,6 +323,7 @@
 		742C63E71E9C750600B8E327 /* MovieWebService */ = {
 			isa = PBXGroup;
 			children = (
+				076375151EBB0F27006E280B /* Screenshots */,
 				742C63EB1E9C750600B8E327 /* AppDelegate.h */,
 				742C63EC1E9C750600B8E327 /* AppDelegate.m */,
 				742C63F11E9C750600B8E327 /* Main.storyboard */,
