@@ -10,8 +10,8 @@ import UIKit
 
 @objc class DetailsModuleBuilder: NSObject {
 
-    func build(with data: Any) -> UIViewController {
-
+    func build(with data: Any) -> UIViewController? {
+        
         let viewController = DetailsViewController()
 
         let router = DetailsRouter()
@@ -26,7 +26,13 @@ import UIKit
 
         presenter.interactor = interactor
         viewController.output = presenter
-        viewController.director = data as? Director
+        
+        guard let film = data as? Film else {
+            print("Couldn't get film data")
+            return nil
+        }
+        
+        viewController.director = film.director
 
         return viewController
     }

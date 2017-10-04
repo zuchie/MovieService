@@ -13,11 +13,18 @@ class DetailsViewController: UIViewController, DetailsViewInput, TappableLabelDe
     var output: DetailsViewOutput!
     public var director: Director!
 
-    var directorName: UILabel!
-    var directorNameValue: UILabel!
-    var tapToShowMore: TappableLabel!
-    var actorName: UILabel!
-    var actorScreenName: UILabel!
+    enum Label {
+        case directorName(UILabel, CGRect, String, CGFloat)
+        case directorNameValue(UILabel, CGRect, String, CGFloat)
+        case tapToShowMore(TappableLabel, CGRect, String, CGFloat)
+        case actorName(UILabel, CGRect, String, CGFloat)
+        case actorNameValue(UILabel, CGRect, String, CGFloat)
+        case actorScreenName(UILabel, CGRect, String, CGFloat)
+        case actorScreenNameValue(UILabel, CGRect, String, CGFloat)
+    }
+    
+    
+    var labels: [UILabel]!
 
     // MARK: Life cycle
     
@@ -26,45 +33,73 @@ class DetailsViewController: UIViewController, DetailsViewInput, TappableLabelDe
         output.viewIsReady()
         view = UIView()
         view.backgroundColor = .white
+        
+        let labelTextSize: CGFloat = 18.0
+        let labelValueTextSize: CGFloat = 15.0
+        let labelFrame = CGRect(x: 20, y: 100, width: 200, height: 30)
 
-        directorName = UILabel()
-        view.addSubview(directorName)
-        directorName.frame = CGRect(x: 20, y: 100, width: 200, height: 30)
-        directorName.text = "Director Name"
-
-        directorNameValue = UILabel()
-        view.addSubview(directorNameValue)
-        directorNameValue.frame = CGRect(x: 20, y: 150, width: 200, height: 30)
-        directorNameValue.text = director.name;
-
-        tapToShowMore = TappableLabel()
-        view.addSubview(tapToShowMore)
-        tapToShowMore.frame = CGRect(x: 20, y: 200, width: 200, height: 30)
-        tapToShowMore.text = "Tap here to show more"
-        tapToShowMore.delegate = self
-
-        actorName = UILabel()
-        view.addSubview(actorName)
-        actorName.frame = CGRect(x: 20, y: 240, width: 200, height: 30)
-
-        actorScreenName = UILabel()
-        view.addSubview(actorScreenName)
-        actorScreenName.frame = CGRect(x: 20, y: 270, width: 200, height: 30)
-        actorName.isHidden = true
-        actorScreenName.isHidden = true
-
-        let actor: Actor = director.film.cast?[0] as! Actor
-        actorName.text = director.name;
-        actorScreenName.text = actor.screenName;
-
+        let actor: Actor = director.film.cast[0]
+        
+        labels = [
+                Label.directorName(UILabel(), labelFrame, "Director Name", labelTextSize),
+                Label.directorNameValue(UILabel(), labelFrame.offsetBy(dx: 0, dy: 50), director.name, labelValueTextSize),
+                Label.tapToShowMore(TappableLabel(), labelFrame.offsetBy(dx: 0, dy: 120), "Tap here to show more", labelTextSize),
+                Label.actorName(UILabel(), labelFrame.offsetBy(dx: 0, dy: 170), "Actor Name", labelTextSize),
+                Label.actorNameValue(UILabel(), labelFrame.offsetBy(dx: 0, dy: 220), actor.name, labelValueTextSize),
+                Label.actorScreenName(UILabel(), labelFrame.offsetBy(dx: 0, dy: 270), "Actor Screen Name", labelTextSize),
+                Label.actorScreenNameValue(UILabel(), labelFrame.offsetBy(dx: 0, dy: 320), actor.screenName, labelValueTextSize)
+            ]
+            .map(makeALabel)
+            
+            labels.forEach { self.view.addSubview($0) }
     }
 
-
+    // MARK: Helpers
+    
+    func makeALabel(_ label: Label) -> UILabel {
+        func makeLabel(_ label: UILabel, _ frame: CGRect, _ text: String, _ fontSize: CGFloat) -> UILabel {
+            let label = label
+            label.frame = frame
+            label.text = text
+            label.font = label.font.withSize(fontSize)
+            
+            return label
+        }
+        
+        switch label {
+        case let .directorName(label, frame, text, fontSize):
+            return makeLabel(label, frame, text, fontSize)
+        case let .directorNameValue(label, frame, text, fontSize):
+            return makeLabel(label, frame, text, fontSize)
+        case let .tapToShowMore(label, frame, text, fontSize):
+            label.delegate = self
+            return makeLabel(label, frame, text, fontSize)
+        case let .actorName(label, frame, text, fontSize):
+            label.isHidden = true
+            return makeLabel(label, frame, text, fontSize)
+        case let .actorNameValue(label, frame, text, fontSize):
+            label.isHidden = true
+            return makeLabel(label, frame, text, fontSize)
+        case let .actorScreenName(label, frame, text, fontSize):
+            label.isHidden = true
+            return makeLabel(label, frame, text, fontSize)
+        case let .actorScreenNameValue(label, frame, text, fontSize):
+            label.isHidden = true
+            return makeLabel(label, frame, text, fontSize)
+        }
+    }
+    
+    
     // MARK: DetailsViewInput
 
     func didReceiveTouch() {
-        actorName.isHidden = false
-        actorScreenName.isHidden = false
+        labels[3..<labels.count].forEach { $0.isHidden = false }
     }
+    
+    func setupInitialState() {
+        navigationItem.title = "DetailsViewController"
+        view.backgroundColor = .white
+    }
+
 
 }

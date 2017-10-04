@@ -19,26 +19,27 @@
         self.languages = [data objectForKey:@"languages"];
         [self setNominated:[[data objectForKey:@"nominated"] boolValue]];
         self.releaseDate = [NSDate dateWithTimeIntervalSince1970:[[data objectForKey:@"releaseDate"] doubleValue]];
-        self.name = [data objectForKey:@"name"];
+        [self setName:[data objectForKey:@"name"]];
         self.rating = [[data objectForKey:@"rating"] doubleValue];
         self.director = [[Director alloc] initWithData:[data objectForKey:@"director"]];
-        NSMutableArray *castsList = nil;
-        NSArray *castsData = [data objectForKey:@"casts"];
+        self.director.film = self;
+        NSMutableArray *castsList = [[NSMutableArray alloc]init];
+        NSArray *castsData = [data objectForKey:@"cast"];
         for (NSDictionary *castData in castsData) {
             Actor *actor = [[Actor alloc] initWithData:castData];
             actor.film = self;
             [castsList addObject:actor];
         }
         self.cast = castsList;
-        [castsList removeAllObjects];
+        //[castsList removeAllObjects];
     }
     return self;
 }
 
 
 - (void)setName:(NSString *)name {
-    if (name != _name) {
-        name = _name;
+    if (_name != name) {
+        _name = name;
     }
 }
 

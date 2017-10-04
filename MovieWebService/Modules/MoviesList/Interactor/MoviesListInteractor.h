@@ -16,4 +16,6 @@
 @property (nonatomic, weak) id<MoviesListInteractorOutput> output;
 @property (nonatomic, strong) IBOutlet CellTableViewCell *movieCell;
 
+- (void)configureCell:(CellTableViewCell *)cell indexPath:(NSIndexPath *)myIndexPath;
+
 @end

@@ -21,11 +21,13 @@
 }
 
 - (void)setViewForSetup:(UIView *)view1 {
+    //dispatch_async(dispatch_get_main_queue(), ^{
     view = view1;
     tableView = [UITableView new];
     [view addSubview:tableView];
     tableView.delegate = self;
     tableView.dataSource = self;
+    //});
 }
 
 #pragma mark - MoviesListInteractorInput
@@ -42,50 +44,64 @@
     [tableView reloadData];
 }
 
+- (void)configureCell:(CellTableViewCell *)cell indexPath:(NSIndexPath *)myIndexPath {
+    Film *film = [films objectAtIndex:myIndexPath.row];
+    cell.name.text = film.name;
+  
+    NSString* dateText;
+    NSDateFormatter *f = [[NSDateFormatter alloc] init];
+    [f setDateFormat:@"MMM dd, yyy"];
+    [f setTimeZone:[NSTimeZone timeZoneWithName:@"UTC"]];
+    dateText = [f stringFromDate:film.releaseDate];
+  
+    cell.date.text = dateText;
+  
+    NSString *filmRatingText;
+    switch (film.filmRating) {
+        case G:
+        filmRatingText = @"G";
+        case PG:
+        filmRatingText = @"PG";
+        case PG13:
+        filmRatingText = @"PG13";
+        case R:
+        filmRatingText = @"R";
+      default:
+        break;
+    }
+    cell.filmRating.text = filmRatingText;
+  
+    NSNumberFormatter *formatter = [[NSNumberFormatter alloc] init];
+    [formatter setNumberStyle:NSNumberFormatterDecimalStyle];
+    [formatter setMaximumFractionDigits:1];
+    [formatter setRoundingMode: NSNumberFormatterRoundHalfUp];
+    NSString *numberString = [formatter stringFromNumber:[NSNumber numberWithFloat:film.rating]];
+  
+    cell.rating.text = numberString;
+}
+
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     return films.count;
 }
 
-- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
+- (UITableViewCell *)tableView:(UITableView *)myTableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     static NSString *CellIdentifier = @"CellTableViewCell";
-    CellTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
+    CellTableViewCell *cell = [myTableView dequeueReusableCellWithIdentifier:CellIdentifier];
     if (cell == nil) {
         cell = [[[NSBundle mainBundle] loadNibNamed:@"CellTableViewCell" owner:self options:nil] firstObject];
-        //cell = self.movieCell;
-        //self.movieCell = nil;
     }
-    Film *film = [films objectAtIndex:indexPath.row];
-    cell.name.text = film.name;
-
-    NSCalendar* cal = [NSCalendar new];
-    NSString* dateText;
-    NSDateFormatter *f = [[NSDateFormatter alloc] init];
-    [f setCalendar:cal];
-    dateText = [f stringFromDate:film.releaseDate];
-
-    cell.date.text = dateText;
-
-    NSString *filmRatingText;
-    switch (film.filmRating) {
-        case G:
-            filmRatingText = @"G";
-        case PG:
-            filmRatingText = @"PG";
-        case PG13:
-            filmRatingText = @"PG13";
-        case R:
-            filmRatingText = @"R";
-        default:
-            break;
-    }
-    cell.filmRating.text = filmRatingText;
-    cell.rating.text = [[NSNumber numberWithInteger:film.rating] stringValue];
-
+  
+    [self configureCell:cell indexPath:indexPath];
+  
     return cell;
 }
 
-- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-    [tableView deselectRowAtIndexPath:indexPath animated:YES];
+- (double)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
+    return 67.0;
+}
+
+- (void)tableView:(UITableView *)myTableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    [myTableView deselectRowAtIndexPath:indexPath animated:YES];
     AppDelegate *appDelegate = (AppDelegate*)[[UIApplication sharedApplication] delegate];
     Film *film = [films objectAtIndex:indexPath.row];
     DetailsModuleBuilder *builder = [DetailsModuleBuilder new];
