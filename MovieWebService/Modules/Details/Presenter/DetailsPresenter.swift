@@ -15,7 +15,16 @@ class DetailsPresenter: DetailsModuleInput, DetailsViewOutput, DetailsInteractor
     // MARK: - DetailsViewOutput
     
     func viewIsReady() {
-
+        view.setupInitialState()
+        
+    }
+    
+    func setViewForSetup(_ view: UIView) {
+        interactor.setViewForSetup(view)
+    }
+    
+    func setData(_ director: Director) {
+        interactor.setData(director)
     }
     
     // MARK: - DetailsInteractorOutput
