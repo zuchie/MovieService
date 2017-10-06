@@ -10,7 +10,6 @@ class DetailsInteractor: NSObject, DetailsInteractorInput, TappableLabelDelegate
 
     weak var output: DetailsInteractorOutput!
     var view: UIView!
-    var director: Director!
     
     enum Label {
         case directorName(UILabel, CGRect, String, CGFloat)
@@ -27,8 +26,6 @@ class DetailsInteractor: NSObject, DetailsInteractorInput, TappableLabelDelegate
     let labelTextSize: CGFloat = 18.0
     let labelValueTextSize: CGFloat = 15.0
     let labelFrame = CGRect(x: 20, y: 100, width: 200, height: 30)
-    
-    var actor: Actor!
 
     // MARK: - DetailsInteractorInput
     
@@ -36,18 +33,43 @@ class DetailsInteractor: NSObject, DetailsInteractorInput, TappableLabelDelegate
         self.view = view
     }
     
-    func setData(_ data: Director) {
-        self.director = data
-        actor = director.film.cast[0]
+    func setData(_ data: Director?) {
+        guard let director = data, !director.film.cast.isEmpty else {
+            print("Invalid director data")
+            return
+        }
+        
+        let actor = director.film.cast[0]
         
         labels = [
-            Label.directorName(UILabel(), labelFrame, "Director Name", labelTextSize),
-            Label.directorNameValue(UILabel(), labelFrame.offsetBy(dx: 0, dy: 50), director.name, labelValueTextSize),
-            Label.tapToShowMore(TappableLabel(), labelFrame.offsetBy(dx: 0, dy: 120), "Tap here to show more", labelTextSize),
-            Label.actorName(UILabel(), labelFrame.offsetBy(dx: 0, dy: 170), "Actor Name", labelTextSize),
-            Label.actorNameValue(UILabel(), labelFrame.offsetBy(dx: 0, dy: 220), actor.name, labelValueTextSize),
-            Label.actorScreenName(UILabel(), labelFrame.offsetBy(dx: 0, dy: 270), "Actor Screen Name", labelTextSize),
-            Label.actorScreenNameValue(UILabel(), labelFrame.offsetBy(dx: 0, dy: 320), actor.screenName, labelValueTextSize)
+            Label.directorName(UILabel(),
+                               labelFrame,
+                               "Director Name",
+                               labelTextSize),
+            Label.directorNameValue(UILabel(),
+                                    labelFrame.offsetBy(dx: 0, dy: 50),
+                                    director.name ?? "Unknown director name",
+                                    labelValueTextSize),
+            Label.tapToShowMore(TappableLabel(),
+                                labelFrame.offsetBy(dx: 0, dy: 120),
+                                "Tap here to show more",
+                                labelTextSize),
+            Label.actorName(UILabel(),
+                            labelFrame.offsetBy(dx: 0, dy: 170),
+                            "Actor Name",
+                            labelTextSize),
+            Label.actorNameValue(UILabel(),
+                                 labelFrame.offsetBy(dx: 0, dy: 220),
+                                 actor.name ?? "Unknown actor name",
+                                 labelValueTextSize),
+            Label.actorScreenName(UILabel(),
+                                  labelFrame.offsetBy(dx: 0, dy: 270),
+                                  "Actor Screen Name",
+                                  labelTextSize),
+            Label.actorScreenNameValue(UILabel(),
+                                       labelFrame.offsetBy(dx: 0, dy: 320),
+                                       actor.screenName ?? "Unknown actor screen name",
+                                       labelValueTextSize)
             ]
             .map(makeALabel)
         
@@ -92,6 +114,11 @@ class DetailsInteractor: NSObject, DetailsInteractorInput, TappableLabelDelegate
     }
 
     func didReceiveTouch() {
+        guard labels.count > 3 else {
+            print("No labels hidden")
+            return
+        }
+        
         labels[3..<labels.count].forEach { $0.isHidden = false }
     }
     

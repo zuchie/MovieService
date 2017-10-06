@@ -22,7 +22,7 @@ class DetailsPresenter: DetailsModuleInput, DetailsViewOutput, DetailsInteractor
         interactor.setViewForSetup(view)
     }
     
-    func setData(_ director: Director) {
+    func setData(_ director: Director?) {
         interactor.setData(director)
     }
     

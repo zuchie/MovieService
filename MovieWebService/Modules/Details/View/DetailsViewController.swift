@@ -11,7 +11,7 @@ import UIKit
 class DetailsViewController: UIViewController, DetailsViewInput {
 
     var output: DetailsViewOutput!
-    public var director: Director!
+    public var director: Director?
 
     // MARK: Life cycle
     

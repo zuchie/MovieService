@@ -40,17 +40,51 @@ class DetailsPresenterTests: XCTestCase {
 
         super.tearDown()
     }
+    
+    func testIfViewIsReady() {
+        // given
+        
+        // when
+        self.presenter.viewIsReady()
+        
+        // then
+        XCTAssertTrue(view.initialStateIsSetup)
+    }
+    
+    func testIfViewIsPassedToInteractor() {
+        // given
+        let view = UIView()
+        
+        // when
+        self.presenter.setViewForSetup(view)
+        
+        // then
+        XCTAssert(view === interactor.view, "View is not passed to interactor")
+    }
+    
+    func testIfDirectorIsPassedToInteractor() {
+        // given
+        let director: Director? = Director()
+        
+        // when
+        self.presenter.setData(director)
+        
+        // then
+        XCTAssert(director === interactor.director, "Data is not passed to interactor")
+    }
 
     // MARK: - Mock
 
     class MockInteractor: DetailsInteractorInput {
+        var view: UIView!
+        var director: Director?
         
         func setViewForSetup(_ view: UIView) {
-        
+            self.view = view
         }
         
-        func setData(_ data: Director) {
-            
+        func setData(_ data: Director?) {
+            director = data
         }
 
     }
@@ -60,9 +94,10 @@ class DetailsPresenterTests: XCTestCase {
     }
 
     class MockView: DetailsViewInput {
+        var initialStateIsSetup = false
 		
         func setupInitialState() {
-            
+            initialStateIsSetup = true
         }
     }
 

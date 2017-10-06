@@ -23,6 +23,7 @@ class DetailsViewTests: XCTestCase {
 		
         viewController = DetailsViewController()
         viewController.output = output
+        viewController.director = Director()
     }
 
     override func tearDown() {
@@ -42,20 +43,46 @@ class DetailsViewTests: XCTestCase {
         //then
         XCTAssertTrue(mock.viewIsReadyDidCall)
     }
+    
+    func testIfViewIsPassed() {
+        //given
+        let mock = MockOutput()
+        
+        //when
+        mock.setViewForSetup(viewController.view)
+        
+        //then
+        XCTAssert(viewController.view === mock.view, "View is not passed to output")
+    }
+    
+    func testIfDataIsPassed() {
+        //given
+        let mock = MockOutput()
+        
+        //when
+        mock.setData(viewController.director)
+        
+        // then
+        XCTAssert(viewController.director === mock.director, "Data is not passed to output")
+    }
 
     // MARK: - Mock
 
     class MockOutput: DetailsViewOutput {
         var viewIsReadyDidCall: Bool = false
+        var view: UIView!
+        var director: Director?
 
         func viewIsReady() {
             viewIsReadyDidCall = true
         }
         
         func setViewForSetup(_ view: UIView) {
+            self.view = view
         }
         
-        func setData(_ director: Director) {
+        func setData(_ director: Director?) {
+            self.director = director
         }
 		
     }

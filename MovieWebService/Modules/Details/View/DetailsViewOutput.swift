@@ -10,6 +10,6 @@ protocol DetailsViewOutput {
 
     func viewIsReady()
     func setViewForSetup(_ view: UIView)
-    func setData(_ director: Director)
+    func setData(_ director: Director?)
 
 }

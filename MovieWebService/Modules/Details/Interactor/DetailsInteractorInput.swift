@@ -9,5 +9,5 @@
 protocol DetailsInteractorInput {
 
     func setViewForSetup(_ view: UIView)
-    func setData(_ data: Director)
+    func setData(_ data: Director?)
 }
