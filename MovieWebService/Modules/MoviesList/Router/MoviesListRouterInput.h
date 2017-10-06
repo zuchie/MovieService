@@ -8,6 +8,10 @@
 
 #import <Foundation/Foundation.h>
 
+@class UIViewController;
+
 @protocol MoviesListRouterInput <NSObject>
+
+- (void)presentDetailsViewController:(UIViewController *)detailsViewController;
 
 @end

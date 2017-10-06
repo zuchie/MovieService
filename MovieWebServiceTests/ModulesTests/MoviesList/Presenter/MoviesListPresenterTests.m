@@ -7,7 +7,7 @@
 //
 
 #import <XCTest/XCTest.h>
-#import <OCMock/OCMock.h>
+#import <OCMock.h>
 
 #import "MoviesListPresenter.h"
 
@@ -66,6 +66,34 @@
 
     // then
     OCMVerify([self.mockView setupInitialState]);
+}
+
+- (void)testThatPresenterPassesViewToInteractor {
+    // given
+    UIView *view = [[UIView alloc] init];
+    
+    // when
+    [self.presenter setViewForSetup:view];
+    
+    // then
+    OCMVerify([self.mockInteractor setViewForSetup:view]);
+    
+    view = nil;
+}
+
+- (void)testThatPresenterPassesDataToInteractor {
+    // given
+    Film *film = [[Film alloc] init];
+    NSArray *films = [NSArray arrayWithObject:film];
+    
+    // when
+    [self.presenter setData:film];
+    
+    // then
+    OCMVerify([self.mockInteractor setData:films]);
+    
+    film = nil;
+    films = nil;
 }
 
 #pragma mark - Тестирование методов MoviesListInteractorOutput

@@ -28,14 +28,17 @@
 }
 
 - (void)setViewForSetup:(UIView *)view {
-    //dispatch_async(dispatch_get_main_queue(), ^{
-        [self.interactor setViewForSetup:view];
-    //});
+    [self.interactor setViewForSetup:view];
 }
 
 - (void)setData:(Film *)film {
     films = [NSArray arrayWithObject:film];
     [self.interactor setData:films];
+}
+
+
+- (void)presentDetailsViewController:(UIViewController *)viewController {
+    [self.router presentDetailsViewController:viewController];
 }
 
 #pragma mark - Методы MoviesListInteractorOutput

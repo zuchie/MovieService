@@ -44,6 +44,14 @@ class DetailsPresenterTests: XCTestCase {
     // MARK: - Mock
 
     class MockInteractor: DetailsInteractorInput {
+        
+        func setViewForSetup(_ view: UIView) {
+        
+        }
+        
+        func setData(_ data: Director) {
+            
+        }
 
     }
 
@@ -53,6 +61,9 @@ class DetailsPresenterTests: XCTestCase {
 
     class MockView: DetailsViewInput {
 		
+        func setupInitialState() {
+            
+        }
     }
 
 }

@@ -8,6 +8,9 @@
 
 #import <Foundation/Foundation.h>
 
+
 @protocol MoviesListInteractorOutput <NSObject>
+
+- (void)presentDetailsViewController:(UIViewController *)viewController;
 
 @end

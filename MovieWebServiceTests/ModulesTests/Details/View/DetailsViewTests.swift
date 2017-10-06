@@ -51,6 +51,12 @@ class DetailsViewTests: XCTestCase {
         func viewIsReady() {
             viewIsReadyDidCall = true
         }
+        
+        func setViewForSetup(_ view: UIView) {
+        }
+        
+        func setData(_ director: Director) {
+        }
 		
     }
 }

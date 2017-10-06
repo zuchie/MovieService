@@ -10,6 +10,7 @@
 #import "MoviesListInteractorOutput.h"
 #import "MoviesListModuleInput.h"
 
+
 @protocol MoviesListViewInput;
 @protocol MoviesListInteractorInput;
 @protocol MoviesListRouterInput;

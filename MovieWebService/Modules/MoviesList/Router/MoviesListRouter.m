@@ -8,8 +8,14 @@
 
 #import "MoviesListRouter.h"
 #import <UIKit/UIKit.h>
+#import "AppDelegate.h"
 
 @implementation MoviesListRouter
+
+- (void)presentDetailsViewController:(UIViewController *)detailsViewController {
+    AppDelegate *appDelegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];
+    [appDelegate.navigationController pushViewController:detailsViewController animated:YES];
+}
 
 #pragma mark - MoviesListRouterInput
 
