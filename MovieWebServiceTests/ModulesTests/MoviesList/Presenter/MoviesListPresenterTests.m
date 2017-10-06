@@ -96,6 +96,19 @@
     films = nil;
 }
 
+- (void)testThatPresenterPassesDetailsViewControllerToRouter {
+    // given
+    UIViewController *viewController = [[UIViewController alloc] init];
+    
+    // when
+    [self.presenter presentDetailsViewController:viewController];
+    
+    // then
+    OCMVerify([self.mockRouter presentDetailsViewController:viewController]);
+              
+    viewController = nil;
+}
+
 #pragma mark - Тестирование методов MoviesListInteractorOutput
 
 @end

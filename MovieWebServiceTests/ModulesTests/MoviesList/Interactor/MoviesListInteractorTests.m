@@ -13,6 +13,7 @@
 
 #import "MoviesListInteractorOutput.h"
 
+
 @interface MoviesListInteractorTests : XCTestCase
 
 @property (nonatomic, strong) MoviesListInteractor *interactor;
@@ -42,6 +43,7 @@
 
     [super tearDown];
 }
+
 
 #pragma mark - Тестирование методов MoviesListInteractorInput
 
