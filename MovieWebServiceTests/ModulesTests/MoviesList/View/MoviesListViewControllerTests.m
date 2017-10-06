@@ -7,7 +7,7 @@
 //
 
 #import <XCTest/XCTest.h>
-#import <OCMock/OCMock.h>
+#import <OCMock.h>
 
 #import "MoviesListViewController.h"
 
