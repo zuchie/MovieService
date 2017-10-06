@@ -28,7 +28,9 @@
 }
 
 - (void)setViewForSetup:(UIView *)view {
-    [self.interactor setViewForSetup:view];
+    //dispatch_async(dispatch_get_main_queue(), ^{
+        [self.interactor setViewForSetup:view];
+    //});
 }
 
 - (void)setData:(Film *)film {

@@ -19,8 +19,9 @@
 - (void)viewDidLoad {
 	[super viewDidLoad];
 
-    [self.output didTriggerViewReadyEvent];
+    [self.output didTriggerViewReadyEvent];    
     [self.output setViewForSetup:self.view];
+
 }
 
 - (void)viewWillAppear:(BOOL)animated {

@@ -21,25 +21,26 @@
 }
 
 - (void)setViewForSetup:(UIView *)view1 {
-    //dispatch_async(dispatch_get_main_queue(), ^{
     view = view1;
     tableView = [UITableView new];
     [view addSubview:tableView];
     tableView.delegate = self;
     tableView.dataSource = self;
-    //});
 }
 
 #pragma mark - MoviesListInteractorInput
 
 - (void)setData:(NSArray *)films1 {
     films = films1;
-    [tableView mas_remakeConstraints:^(MASConstraintMaker *make) {
-        make.left.mas_equalTo(view);
-        make.right.mas_equalTo(view);
-        make.top.mas_equalTo(view);
-        make.bottom.mas_equalTo(view);
-    }];
+    
+    dispatch_async(dispatch_get_main_queue(), ^{
+        [tableView mas_remakeConstraints:^(MASConstraintMaker *make) {
+            make.left.mas_equalTo(view);
+            make.right.mas_equalTo(view);
+            make.top.mas_equalTo(view);
+            make.bottom.mas_equalTo(view);
+        }];
+    });
 
     [tableView reloadData];
 }

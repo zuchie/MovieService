@@ -16,7 +16,6 @@ class DetailsPresenter: DetailsModuleInput, DetailsViewOutput, DetailsInteractor
     
     func viewIsReady() {
         view.setupInitialState()
-        
     }
     
     func setViewForSetup(_ view: UIView) {

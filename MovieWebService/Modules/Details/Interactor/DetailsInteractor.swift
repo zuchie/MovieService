@@ -52,7 +52,7 @@ class DetailsInteractor: NSObject, DetailsInteractorInput, TappableLabelDelegate
             .map(makeALabel)
         
         labels.forEach { self.view.addSubview($0) }
-
+        
     }
     
     

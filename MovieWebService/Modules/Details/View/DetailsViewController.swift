@@ -23,7 +23,6 @@ class DetailsViewController: UIViewController, DetailsViewInput {
         output.setData(director)
     }
     
-    
     // MARK: DetailsViewInput
     
     func setupInitialState() {
