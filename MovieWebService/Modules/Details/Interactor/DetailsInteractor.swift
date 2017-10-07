@@ -55,19 +55,19 @@ class DetailsInteractor: NSObject, DetailsInteractorInput, TappableLabelDelegate
                                 "Tap here to show more",
                                 labelTextSize),
             Label.actorName(UILabel(),
-                            labelFrame.offsetBy(dx: 0, dy: 170),
+                            labelFrame.offsetBy(dx: 0, dy: 120),
                             "Actor Name",
                             labelTextSize),
             Label.actorNameValue(UILabel(),
-                                 labelFrame.offsetBy(dx: 0, dy: 220),
+                                 labelFrame.offsetBy(dx: 0, dy: 170),
                                  actor.name ?? "Unknown actor name",
                                  labelValueTextSize),
             Label.actorScreenName(UILabel(),
-                                  labelFrame.offsetBy(dx: 0, dy: 270),
+                                  labelFrame.offsetBy(dx: 0, dy: 220),
                                   "Actor Screen Name",
                                   labelTextSize),
             Label.actorScreenNameValue(UILabel(),
-                                       labelFrame.offsetBy(dx: 0, dy: 320),
+                                       labelFrame.offsetBy(dx: 0, dy: 270),
                                        actor.screenName ?? "Unknown actor screen name",
                                        labelValueTextSize)
             ]
@@ -114,12 +114,9 @@ class DetailsInteractor: NSObject, DetailsInteractorInput, TappableLabelDelegate
     }
 
     func didReceiveTouch() {
-        guard labels.count > 3 else {
-            print("No labels hidden")
-            return
+        labels.forEach { label in
+            label.isHidden = (label is TappableLabel) ? true : false
         }
-        
-        labels[3..<labels.count].forEach { $0.isHidden = false }
     }
     
 }

@@ -56,18 +56,6 @@
     OCMVerify([self.mockOutput setViewForSetup:self.controller.view]);
 }
 
-/*
-- (void)testThatControllerNotifiesPresenterOnViewWillAppear {
-    // given
-    //UIView *myView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 100, 100)];
-    
-    [self.controller viewWillAppear:NO];
-    //[[UIApplication sharedApplication].keyWindow addSubview:myView];
-    
-    OCMVerify([self.mockOutput setData:[[Film alloc] initWithData:[[NSDictionary alloc] init]]]);
-}
-*/
-
 #pragma mark - Тестирование методов интерфейса
 
 #pragma mark - Тестирование методов MoviesListViewInput
