@@ -52,29 +52,29 @@
     
     // Verify labels from Details View
     XCUIElementQuery *texts = self.app.staticTexts;
-    XCTAssertEqual(texts.allElementsBoundByIndex.count, 4); // 4 labels visible
+    XCTAssertEqual(texts.allElementsBoundByIndex.count, 3); // 3 labels visible
     
-    XCUIElement *element = texts.allElementsBoundByIndex[1];
+    XCUIElement *element = texts.allElementsBoundByIndex[0];
     NSString *labelText = element.label;
     XCTAssertTrue([labelText isEqualToString:@"Director Name"]);
-    element = texts.allElementsBoundByIndex[2];
+    element = texts.allElementsBoundByIndex[1];
     labelText = element.label;
     XCTAssertTrue([labelText isEqualToString:@"Ben Affleck"]);
-    XCUIElement *tappable = texts.allElementsBoundByIndex[3];
+    XCUIElement *tappable = texts.allElementsBoundByIndex[2];
     labelText = tappable.label;
     XCTAssertTrue([labelText isEqualToString:@"Tap here to show more"]);
     
     [tappable tap]; // Tap tappable
     
-    XCTAssertEqual(texts.allElementsBoundByIndex.count, 7); // 7 labels visible
+    XCTAssertEqual(texts.allElementsBoundByIndex.count, 6); // 6 labels visible
     
-    labelText = texts.allElementsBoundByIndex[3].label;
+    labelText = texts.allElementsBoundByIndex[2].label;
     XCTAssertTrue([labelText isEqualToString:@"Actor Name"]);
-    labelText = texts.allElementsBoundByIndex[4].label;
+    labelText = texts.allElementsBoundByIndex[3].label;
     XCTAssertTrue([labelText isEqualToString:@"Bryan Cranston"]);
-    labelText = texts.allElementsBoundByIndex[5].label;
+    labelText = texts.allElementsBoundByIndex[4].label;
     XCTAssertTrue([labelText isEqualToString:@"Actor Screen Name"]);
-    labelText = texts.allElementsBoundByIndex[6].label;
+    labelText = texts.allElementsBoundByIndex[5].label;
     XCTAssertTrue([labelText isEqualToString:@"Jack Donnell"]);
 }
 
