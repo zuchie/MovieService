@@ -35,7 +35,10 @@
 #pragma mark - MoviesListViewInput
 
 - (void)setupInitialState {
-    self.navigationItem.title = @"RootViewController";
+    UIBarButtonItem *back = [[UIBarButtonItem alloc] init];
+    back.title = @"Back";
+    self.navigationItem.backBarButtonItem = back;
+    self.navigationItem.title = @"Root View Controller";
     self.view.backgroundColor = [UIColor whiteColor];
 }
 

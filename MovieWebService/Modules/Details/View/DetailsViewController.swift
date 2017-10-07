@@ -26,7 +26,6 @@ class DetailsViewController: UIViewController, DetailsViewInput {
     // MARK: DetailsViewInput
     
     func setupInitialState() {
-        navigationItem.title = "Details"
         view.backgroundColor = .white
     }
 

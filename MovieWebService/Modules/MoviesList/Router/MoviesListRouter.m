@@ -12,11 +12,11 @@
 
 @implementation MoviesListRouter
 
+#pragma mark - MoviesListRouterInput
+
 - (void)presentDetailsViewController:(UIViewController *)detailsViewController {
     AppDelegate *appDelegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];
     [appDelegate.navigationController pushViewController:detailsViewController animated:YES];
 }
-
-#pragma mark - MoviesListRouterInput
 
 @end

@@ -36,11 +36,10 @@
     [self.interactor setData:films];
 }
 
+#pragma mark - Методы MoviesListInteractorOutput
 
 - (void)presentDetailsViewController:(UIViewController *)viewController {
     [self.router presentDetailsViewController:viewController];
 }
-
-#pragma mark - Методы MoviesListInteractorOutput
 
 @end
