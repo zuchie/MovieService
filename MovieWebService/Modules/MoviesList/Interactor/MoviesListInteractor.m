@@ -40,9 +40,9 @@
             make.top.mas_equalTo(view);
             make.bottom.mas_equalTo(view);
         }];
+        
+        [tableView reloadData];
     });
-
-    [tableView reloadData];
 }
 
 - (void)configureCell:(CellTableViewCell *)cell indexPath:(NSIndexPath *)myIndexPath {
